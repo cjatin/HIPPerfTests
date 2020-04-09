@@ -36,7 +36,7 @@ static void BM_atomic_add_double(benchmark::State& state) {
   for (auto _ : state) {
     hipMemcpy(d_a, data, sizeof(double), hipMemcpyHostToDevice);
     BENCHMARK_GPU_START();
-    hipLaunchKernelGGL(atomicAddKernel<double>, 1, 1, 0, 0, d_a);
+    hipLaunchKernelGGL(atomicAddKernel<double>, 1, 32, 0, 0, d_a);
     BENCHMARK_GPU_STOP();
     benchmark::DoNotOptimize(d_a);
   }
